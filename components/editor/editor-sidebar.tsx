@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import { FolderOpen, Plus, Users, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,8 @@ export interface SidebarProps {
   onClose?: () => void;
   /** Callback invoked when the New Project button is clicked. */
   onNewProject?: () => void;
+  /** Ref or trigger element to return focus to when closed from within. */
+  toggleRef?: React.RefObject<HTMLButtonElement | null>;
   /** Optional additional class names. */
   className?: string;
 }
@@ -27,10 +30,25 @@ export function Sidebar({
   isOpen,
   onClose,
   onNewProject,
+  toggleRef,
   className,
 }: SidebarProps) {
+  const sidebarRef = React.useRef<HTMLElement | null>(null);
+
+  const handleClose = () => {
+    if (
+      sidebarRef.current &&
+      typeof document !== "undefined" &&
+      sidebarRef.current.contains(document.activeElement)
+    ) {
+      toggleRef?.current?.focus();
+    }
+    onClose?.();
+  };
+
   return (
     <aside
+      ref={sidebarRef}
       aria-label="Projects"
       aria-hidden={!isOpen}
       inert={!isOpen ? true : undefined}
@@ -46,7 +64,7 @@ export function Sidebar({
           type="button"
           variant="ghost"
           size="icon-sm"
-          onClick={onClose}
+          onClick={handleClose}
           aria-label="Close sidebar"
           className="rounded-xl text-copy-muted hover:bg-subtle hover:text-copy-primary"
         >
@@ -82,7 +100,9 @@ export function Sidebar({
             No projects yet
           </p>
           <p className="mt-1 text-xs text-copy-muted">
-            Create a new project to start designing your system architecture.
+            {onNewProject
+              ? "Create a new project to start designing your system architecture."
+              : "Project creation is not yet available."}
           </p>
         </TabsContent>
 

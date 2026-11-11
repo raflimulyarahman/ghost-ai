@@ -14,6 +14,8 @@ export interface NavbarProps {
   isSidebarOpen: boolean;
   /** Callback triggered when the sidebar toggle button is clicked. */
   onToggleSidebar: () => void;
+  /** Ref forwarded to the sidebar toggle button. */
+  toggleRef?: React.Ref<HTMLButtonElement>;
   /** Optional content rendered in the center of the navbar. */
   centerContent?: React.ReactNode;
   /** Optional content rendered in the right section of the navbar. */
@@ -28,6 +30,7 @@ export interface NavbarProps {
 export function Navbar({
   isSidebarOpen,
   onToggleSidebar,
+  toggleRef,
   centerContent,
   rightContent,
   className,
@@ -41,6 +44,7 @@ export function Navbar({
     >
       <div className="flex items-center gap-2">
         <Button
+          ref={toggleRef}
           type="button"
           variant="ghost"
           size="icon"
