@@ -5,9 +5,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-heading: var(--font-geist-sans);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-geist-sans), sans-serif;
+  --font-sans: var(--font-geist-sans), sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
 
   /* Ghost AI Theme Token Mappings */
   --color-base: var(--bg-base);
@@ -162,8 +162,35 @@
   }
   html {
     @apply font-sans;
+    font-family: var(--font-geist-sans), sans-serif;
   }
   body {
     @apply bg-base text-copy-primary font-sans antialiased;
+    font-family: var(--font-geist-sans), sans-serif;
+  }
+  code,
+  kbd,
+  samp,
+  pre {
+    @apply font-mono;
+    font-family: var(--font-geist-mono), monospace;
+  }
+}
+
+@layer components {
+  [data-slot="dialog-overlay"] {
+    @apply bg-base/80 backdrop-blur-sm;
+  }
+  [data-slot="dialog-content"] {
+    @apply rounded-3xl border-surface-border bg-surface/95 text-copy-primary backdrop-blur-md;
+  }
+  [data-slot="dialog-title"] {
+    @apply text-copy-primary;
+  }
+  [data-slot="dialog-description"] {
+    @apply text-copy-muted;
+  }
+  [data-slot="dialog-footer"] {
+    @apply border-t border-surface-border pt-4;
   }
 }
