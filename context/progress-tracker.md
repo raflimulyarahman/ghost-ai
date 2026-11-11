@@ -4,7 +4,7 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Phase
 
-- Phase 2: Editor Chrome (Navbar, Project Sidebar, and Dialog Pattern) (Completed)
+- Phase 3: Authentication (Completed)
 
 ## Current Goal
 
@@ -19,6 +19,13 @@ Update this file whenever the current phase, active feature, or implementation s
   - Project Sidebar (`components/editor/editor-sidebar.tsx`): floating left slide-in sidebar over canvas (`isOpen` prop), `Projects` header + close button, `My Projects` and `Shared` shadcn `Tabs` with empty placeholder states, and full-width `New Project` bottom button with `Plus` icon.
   - Dialog Pattern (`components/editor/dialog-shell.tsx` and `app/globals.css`): reusable dialog pattern and data-slot styling supporting title, description, and footer actions using `globals.css` color tokens without modifying `components/ui/dialog.tsx`.
   - Editor shell wired in `app/page.tsx`.
+- `03-auth`:
+  - Clerk provider uses the `dark` theme from `@clerk/ui/themes` with Ghost AI CSS-variable appearance values without hardcoded colors.
+  - Catch-all sign-in and sign-up routes render Clerk's default flows inside the two-panel layout matching the visual reference (brand badge, bold tagline, icon badge feature items on desktop; centered form on mobile).
+  - Root request redirect (`/`) redirects authenticated users to `/editor` and unauthenticated visitors to `/sign-in`.
+  - Global route protection configured through `proxy.ts` using `createRouteMatcher` with existing Clerk environment variables, protecting everything else by default.
+  - Clerk built-in `UserButton` integrated in the editor navbar right section.
+  - Added `suppressHydrationWarning` on root `html` and `body` to avoid extension-injected attribute hydration mismatches.
 
 ## In Progress
 

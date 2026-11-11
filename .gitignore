@@ -40,3 +40,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 fix.md
+
+# agent / tool artifacts
+.playwright-mcp/
+
