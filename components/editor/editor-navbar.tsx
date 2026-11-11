@@ -6,14 +6,25 @@ import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+/**
+ * Props for the Editor Navbar component.
+ */
 export interface NavbarProps {
+  /** Indicates whether the project sidebar is currently open. */
   isSidebarOpen: boolean;
+  /** Callback triggered when the sidebar toggle button is clicked. */
   onToggleSidebar: () => void;
+  /** Optional content rendered in the center of the navbar. */
   centerContent?: React.ReactNode;
+  /** Optional content rendered in the right section of the navbar. */
   rightContent?: React.ReactNode;
+  /** Optional additional class names. */
   className?: string;
 }
 
+/**
+ * Top navigation bar framing the editor screen with sidebar toggle and slot areas.
+ */
 export function Navbar({
   isSidebarOpen,
   onToggleSidebar,

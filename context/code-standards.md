@@ -14,6 +14,12 @@
 - Validate unknown external input at system boundaries before trusting it.
 - Use `interface` for object contracts.
 
+## Documentation & Docstrings
+
+- Write concise JSDoc/docstring comments for all exported components, functions, public interfaces, and types to satisfy docstring coverage checks.
+- Document component/function purpose and prop/parameter contracts.
+- Do not add docstrings to internal inline callbacks or untouched foundation components (`components/ui/*`).
+
 ## Next.js
 
 - Default to React Server Components.

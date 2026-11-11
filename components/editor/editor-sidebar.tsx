@@ -6,13 +6,23 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 
+/**
+ * Props for the Project Sidebar component.
+ */
 export interface SidebarProps {
+  /** Controls whether the floating sidebar is visible. */
   isOpen: boolean;
+  /** Callback invoked when the close button is clicked. */
   onClose?: () => void;
+  /** Callback invoked when the New Project button is clicked. */
   onNewProject?: () => void;
+  /** Optional additional class names. */
   className?: string;
 }
 
+/**
+ * Floating sidebar overlay for managing user projects and shared projects.
+ */
 export function Sidebar({
   isOpen,
   onClose,
@@ -23,6 +33,7 @@ export function Sidebar({
     <aside
       aria-label="Projects"
       aria-hidden={!isOpen}
+      inert={!isOpen ? true : undefined}
       className={cn(
         "fixed top-14 bottom-0 left-0 z-40 flex w-80 flex-col border-r border-surface-border bg-surface/95 backdrop-blur-md transition-transform duration-200 ease-in-out",
         isOpen ? "translate-x-0" : "-translate-x-full pointer-events-none",
@@ -90,9 +101,11 @@ export function Sidebar({
       </Tabs>
 
       <div className="border-t border-surface-border p-4">
+        {/* TODO: Connect onNewProject when project creation flow is implemented */}
         <Button
           type="button"
           onClick={onNewProject}
+          disabled={!onNewProject}
           className="w-full rounded-xl bg-brand text-base hover:bg-brand/90"
         >
           <Plus className="h-5 w-5" />

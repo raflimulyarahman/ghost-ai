@@ -11,19 +11,32 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { cn } from "@/lib/utils";
 
+/**
+ * Props for the DialogShell component.
+ */
 export interface DialogShellProps {
+  /** Controls open state of the dialog. */
   open?: boolean;
+  /** Callback invoked on open state change. */
   onOpenChange?: (open: boolean) => void;
+  /** Optional trigger element for opening the dialog. */
   trigger?: React.ReactNode;
+  /** Header title of the dialog. */
   title: React.ReactNode;
+  /** Optional description text under the title. */
   description?: React.ReactNode;
+  /** Dialog content body. */
   children?: React.ReactNode;
+  /** Optional action buttons for the dialog footer. */
   footer?: React.ReactNode;
+  /** Optional additional class names for dialog content container. */
   className?: string;
 }
 
+/**
+ * Reusable dialog shell framing standard modal dialogs with Ghost AI styling.
+ */
 export function DialogShell({
   open,
   onOpenChange,
@@ -37,26 +50,15 @@ export function DialogShell({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       {trigger ? <DialogTrigger asChild>{trigger}</DialogTrigger> : null}
-      <DialogContent
-        className={cn(
-          "rounded-3xl border-surface-border bg-surface/95 text-copy-primary backdrop-blur-md",
-          className,
-        )}
-      >
+      <DialogContent className={className}>
         <DialogHeader>
-          <DialogTitle className="text-copy-primary">{title}</DialogTitle>
+          <DialogTitle>{title}</DialogTitle>
           {description ? (
-            <DialogDescription className="text-copy-muted">
-              {description}
-            </DialogDescription>
+            <DialogDescription>{description}</DialogDescription>
           ) : null}
         </DialogHeader>
         {children}
-        {footer ? (
-          <DialogFooter className="border-t border-surface-border pt-4">
-            {footer}
-          </DialogFooter>
-        ) : null}
+        {footer ? <DialogFooter>{footer}</DialogFooter> : null}
       </DialogContent>
     </Dialog>
   );
